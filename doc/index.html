@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Документация библиотеки полиномов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #8e44ad;
+        }
+        
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        code {
+            color: #c7254e;
+            background: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .example {
+            background: #fff9db;
+            padding: 15px;
+            border-left: 5px solid #f1c40f;
+        }
+        
+        .warning {
+            background: #ffe6e6;
+            padding: 15px;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .method-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .method-table th, .method-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .method-table th {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Документация библиотеки работы с полиномами</h1>
+    
+    <div class="section" id="overview">
+        <h2>Общее описание</h2>
+        <p>Библиотека предоставляет инструменты для работы с математическими полиномами:</p>
+        <ul>
+            <li>Класс <code>Point</code> для представления точек</li>
+            <li>Класс <code>Polynomial</code> для работы с полиномами</li>
+            <li>Класс <code>NewtonPolynomial</code> для интерполяции</li>
+        </ul>
+    </div>
+
+    <div class="section" id="point-class">
+        <h2>Класс Point</h2>
+        <h3>Назначение</h3>
+        <p>Представляет точку в двумерном пространстве (x, y).</p>
+        
+        <h3>Основные методы</h3>
+        <table class="method-table">
+            <tr>
+                <th>Метод</th>
+                <th>Описание</th>
+            </tr>
+            <tr>
+                <td><code>Point(double x, double y)</code></td>
+                <td>Конструктор с координатами</td>
+            </tr>
+            <tr>
+                <td><code>getX()</code>, <code>getY()</code></td>
+                <td>Получение координат</td>
+            </tr>
+        </table>
+        
+        <div class="example">
+            <h3>Пример использования</h3>
+            <pre>
+Point p1 = new Point(1.5, 2.3);
+System.out.println(p1.getX()); // 1.5</pre>
+        </div>
+    </div>
+
+    <div class="section" id="polynomial-class">
+        <h2>Класс Polynomial</h2>
+        <h3>Возможности</h3>
+        <ul>
+            <li>Арифметические операции</li>
+            <li>Вычисление значений</li>
+            <li>Строковое представление</li>
+        </ul>
+        
+        <div class="example">
+            <h3>Пример создания</h3>
+            <pre>
+// 3x² + 2x + 1
+Polynomial p = new Polynomial(1, 2, 3);
+System.out.println(p); // "3.00x² + 2.00x + 1.00"</pre>
+        </div>
+    </div>
+
+    <div class="section" id="newton-class">
+        <h2>Класс NewtonPolynomial</h2>
+        <h3>Интерполяция</h3>
+        <p>Строит полином по заданным точкам</p>
+        
+        <div class="example">
+            <pre>
+List<Point> points = Arrays.asList(
+    new Point(1, 2),
+    new Point(3, 5)
+);
+NewtonPolynomial np = new NewtonPolynomial(points);
+System.out.println(np.evaluate(2.0)); // Интерполяция в точке x=2</pre>
+        </div>
+    </div>
+
+    <div class="section warning">
+        <h2>Важные предупреждения</h2>
+        <ul>
+            <li>Деление на ноль в <code>Polynomial.divide()</code></li>
+            <li>Точки с одинаковыми X в интерполяции</li>
+        </ul>
+    </div>
+
+    <script>
+        // Добавляем навигационное меню
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.createElement('div');
+            nav.style.position = 'fixed';
+            nav.style.right = '20px';
+            nav.style.top = '20px';
+            nav.style.backgroundColor = '#f8f9fa';
+            nav.style.padding = '15px';
+            nav.style.borderRadius = '5px';
+            nav.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
+            
+            const headings = document.querySelectorAll('h2');
+            headings.forEach(h => {
+                const link = document.createElement('a');
+                link.href = `#${h.parentElement.id}`;
+                link.textContent = h.textContent;
+                link.style.display = 'block';
+                link.style.margin = '5px 0';
+                link.style.color = '#3498db';
+                nav.appendChild(link);
+            });
+            
+            document.body.appendChild(nav);
+        });
+    </script>
+</body>
+</html>
